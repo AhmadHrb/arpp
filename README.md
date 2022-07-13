@@ -5,12 +5,16 @@ The language will also have an official application used for creation of buildin
 
 Plans include both 2D and 3D renders and ability to export to AutoCAD.
 
-### Expected Language:
+### Current Progress:
+##### building.arpp
 ```
-  setRender(2D)
-  createRoom(width,height)
-  goTo(x,y)
-  place("car",x,y)
+render 2d
+
+room height:5 width:5
   ```
+  
+  ### Compiling:
+  
+  Write an arpp file (example above) and save it to building.arpp in the same directory of the compiler file (to change name you need to change compiler code for now), then run `node compiler.js` and a building.dxf should be created.
   
   More soon.
