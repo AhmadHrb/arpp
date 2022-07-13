@@ -36,7 +36,8 @@ exports.setRender = function (type) {
 
 exports.createRoom = function (width,height) {
 if (renderType == 0) {
-    d.drawRect(currentX,currentY,width,height);
+    d.drawRect(currentX,currentY,currentX+width,currentY+height);
+    console.log(currentX,currentY,currentX+width,currentY+height)
 }
 }
 exports.forward = function (steps) {

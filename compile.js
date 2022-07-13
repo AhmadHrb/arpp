@@ -22,14 +22,28 @@ lr.on('line', function (line) {
         let roomHeight;
         let roomWidth;
         if (splitIt[1].startsWith("height:")) {
-            roomHeight = splitIt[1].slice(7);
-            console.log("room height: " + roomHeight)
+                roomHeight = splitIt[1].slice(7);
+            if (parseInt(roomHeight)) {
+                console.log("room height: " + roomHeight)
+            } else throw "Error expected number for room height";
         } else throw "Error in room, expected room height:y width:x (where x and y are numbers)";
         if (splitIt[2].startsWith("width:")) {
-            roomWidth = splitIt[2].slice(6);
-            console.log("room width: " + roomWidth)
+                roomWidth = splitIt[2].slice(6);
+            if (parseInt(roomWidth)) {
+                console.log("room width: " + roomWidth)
+            } else throw "Error expected number for room width";
         } else throw "Error in room, expected room height:y width:x (where x and y are numbers)";
-        arpp.createRoom(roomWidth,roomHeight);
+        arpp.createRoom(parseInt(roomWidth),parseInt(roomHeight));
+    } else if (line.startsWith("forward")) {
+        let forward = line.split(" ");
+        if (parseInt(forward[1])) {
+            arpp.forward(parseInt(forward[1]));
+        } else throw "Error expected number for forward, example: forward 10";
+    } else if (line.startsWith("right")) {
+        let right = line.split(" ");
+        if (parseInt(right[1])) {
+            arpp.right(parseInt(right[1]));
+        } else throw "Error expected number for right, example: right 10";
     }
 });
 
