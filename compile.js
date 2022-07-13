@@ -7,7 +7,7 @@ arpp.init();
 // lr.on('error', function (err) {});
 
 lr.on('line', function (line) {
-    if (line == "" || line == " ") return;
+    if (line == "" || line == " " || line.startsWith("//")) return;
     if (line.startsWith("render")) {
         let renderType = line.split(" ")[1];
         if (renderType == "2d") {

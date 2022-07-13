@@ -8,11 +8,13 @@ const Drawing = require('dxf-writer');
 let d = new Drawing();
 const fs = require('fs');
 
-let renderType = 0; //2d or 3d
+exports.renderType = 0; //2d or 3d
 
 // current position, used to draw
-let currentX = 0;
-let currentY = 0;
+exports.currentX = 0;
+exports.currentY = 0;
+exports.currentZ = 0;
+exports.currentColor = "ffffff";
 
 exports.init = function() {
     d.setUnits('Centimeters');
@@ -26,23 +28,23 @@ exports.save = function () {
 // change 2d and 3d rendering
 exports.setRender = function (type) {
     if (type == "2d") {
-        renderType = 0;
+        this.renderType = 0;
     } else if (type == "3d") {
-        renderType = 1;
+        this.renderType = 1;
     } else {
         throw "render type, only 2d and 3d are allowed.";
     }
 }
 
 exports.createRoom = function (width,height) {
-if (renderType == 0) {
-    d.drawRect(currentX,currentY,currentX+width,currentY+height);
-    console.log(currentX,currentY,currentX+width,currentY+height)
+if (this.renderType == 0) {
+    d.drawRect(this.currentX,this.currentY,this.currentX+width,this.currentY+height);
+    console.log(this.currentX,this.currentY,this.currentX+width,this.currentY+height)
 }
 }
 exports.forward = function (steps) {
-    currentY += steps;
+    this.currentY += steps;
 }
 exports.right = function (steps) {
-    currentX += steps;
+    this.currentX += steps;
 }
