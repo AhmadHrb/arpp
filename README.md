@@ -11,6 +11,11 @@ Plans include both 2D and 3D renders and ability to export to AutoCAD.
 render 2d
 
 room height:5 width:5
+
+forward 10
+right 5
+
+room height:10 width:10
   ```
   
   ### Compiling:
