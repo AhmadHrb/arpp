@@ -1,5 +1,4 @@
-var LineByLineReader = require('line-by-line'),
-    lr = new LineByLineReader('building.arpp');
+var LineByLineReader = require('line-by-line'), lr = new LineByLineReader('building.arpp');
 let arpp = require("../main.js");
 
 // lr.on('error', function (err) {});
@@ -48,16 +47,10 @@ lr.on('line', function (line) {
 
             rooms.push({
                 size: {
-                    x: roomX,
-                    y: roomY,
-                    z: roomZ
-                },
-                position: {
-                    x: arpp.currentX,
-                    y: arpp.currentY,
-                    z: arpp.currentZ
-                },
-                color: "0x" + arpp.currentColor
+                    x: roomX, y: roomY, z: roomZ
+                }, position: {
+                    x: arpp.currentX, y: arpp.currentY, z: arpp.currentZ
+                }, color: "0x" + arpp.currentColor
             })
         }
     } else if (line.startsWith("forward")) {
@@ -70,6 +63,44 @@ lr.on('line', function (line) {
         if (parseInt(right[1])) {
             arpp.right(parseInt(right[1]));
         } else throw "Error expected number for right, example: right 10";
+    } else if (line.startsWith("goto")) {
+        let splitIt = line.split(" ");
+        if (arpp.renderType == 0) {
+            let posX;
+            let posY;
+
+             if (parseInt(splitIt[1])) {
+                 posX = splitIt[1];
+             }
+             if (parseInt(splitIt[2])) {
+                 posY = splitIt[2];
+             }
+             arpp.currentX = posX;
+             arpp.currentY = posY;
+        } else if (arpp.renderType == 1) {
+
+            let posX;
+            let posY;
+            let posZ;
+
+            if (parseInt(splitIt[1])) {
+                posX = splitIt[1];
+            }
+            if (parseInt(splitIt[2])) {
+                posY = splitIt[2];
+            }
+            if (parseInt(splitIt[3])) {
+                posZ = splitIt[3];
+            }
+            arpp.currentX = posX;
+            arpp.currentY = posY;
+            arpp.currentZ = posZ;
+        }
+    } else if (line.startsWith("color")) {
+        if (line.split(" ")[1]) {
+            let color = line.split(" ")[1];
+            arpp.currentColor = color;
+        } else throw "Error no color given.";
     }
 });
 
@@ -77,6 +108,6 @@ lr.on('end', function () {
     if (arpp.renderType == 0) {
         arpp.save();
     } else if (arpp.renderType == 1) {
-        require("fs").writeFileSync("3d.json",JSON.stringify(rooms));
+        require("fs").writeFileSync("3d.json", JSON.stringify(rooms));
     }
 });

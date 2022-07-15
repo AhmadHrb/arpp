@@ -1,0 +1,15 @@
+{
+  "name": "arpp",
+  "author": "AhmadHrb",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "compile": "node compile.js"
+  },
+  "dependencies": {
+    "dxf-parser": "^1.1.2",
+    "dxf-writer": "^1.17.1",
+    "line-by-line": "^0.1.6",
+    "three-dxf": "^1.3.1"
+  }
+}

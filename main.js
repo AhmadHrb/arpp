@@ -16,7 +16,7 @@ exports.currentY = 0;
 exports.currentZ = 0;
 exports.currentColor = "ffffff";
 
-exports.init = function() {
+exports.init = function () {
     d.setUnits('Centimeters');
     d.addLayer('main', Drawing.ACI.RED, 'CONTINUOUS');
     d.setActiveLayer('main');
@@ -36,11 +36,11 @@ exports.setRender = function (type) {
     }
 }
 
-exports.createRoom = function (width,height) {
-if (this.renderType == 0) {
-    d.drawRect(this.currentX,this.currentY,this.currentX+width,this.currentY+height);
-    console.log(this.currentX,this.currentY,this.currentX+width,this.currentY+height)
-}
+exports.createRoom = function (width, height) {
+    if (this.renderType == 0) {
+        d.drawRect(this.currentX, this.currentY, this.currentX + width, this.currentY + height);
+        console.log(this.currentX, this.currentY, this.currentX + width, this.currentY + height)
+    }
 }
 exports.forward = function (steps) {
     this.currentY += steps;
